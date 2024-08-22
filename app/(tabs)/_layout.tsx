@@ -1,45 +1,66 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text } from 'react-native'
+import { Tabs, Redirect } from 'expo-router'
+import { TabBarIcon } from "@/components/navigation/TabBarIcon"
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabsLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-      name='texted'
-      options={{ 
-        title: 'Text',
-        tabBarIcon: ({color, focused}) => (
-          <TabBarIcon name={focused ? 'text' : 'text-outline'} color={color} />
-        )
-       }} />
-    </Tabs>
-  );
+    <>
+        <Tabs
+          screenOptions={{ 
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: '#ffa002',
+            tabBarStyle: {
+              borderTopWidth: 1,
+              borderTopColor: '#232433',
+              height: 60
+            }
+
+           }}
+        >
+            <Tabs.Screen
+             name='dashboard'
+             options={{ 
+                title: "Home",
+                headerShown: false,
+                tabBarIcon: ({ color, focused}) => (
+                    <View style={{ alignItems: 'center' , gap: 7}} >
+                      <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+                      <Text style={{ color: color }} className={"font-pmedium"} >Home</Text>
+                    </View>
+                )
+              }}
+             />
+
+            <Tabs.Screen
+             name='layanan'
+             options={{ 
+                title: "Layanan",
+                headerShown: false,
+                tabBarIcon: ({ color, focused}) => (
+                    <View style={{ alignItems: 'center' , gap: 7}} >
+                      <TabBarIcon name={focused ? 'hand-left' : 'hand-left-outline'} color={color} />
+                      <Text style={{ color: color }} className={"font-pmedium"} >Layanan</Text>
+                    </View>
+                )
+              }}
+             />
+
+            <Tabs.Screen
+             name='profile'
+             options={{ 
+                title: "Profile",
+                headerShown: false,
+                tabBarIcon: ({ color, focused}) => (
+                    <View style={{ alignItems: 'center' , gap: 7}} >
+                      <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={color} />
+                      <Text style={{ color: color }} className={"font-pmedium"} >Profile</Text>
+                    </View>
+                )
+              }}
+             />
+        </Tabs>
+    </>
+  )
 }
+
+export default TabsLayout
